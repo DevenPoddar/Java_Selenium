@@ -1,0 +1,4 @@
+Patient ID: 1, Name: Deven Poddar, Disease: Flu, Age: 23
+Patient ID: 2, Name: Rishu Jha, Disease: Dengue, Age: 24
+Patient ID: 1, Name: Deven Poddar, Disease: Flu, Age: 23
+Patient ID: 2, Name: Rishu Jha, Disease: Dengue, Age: 24

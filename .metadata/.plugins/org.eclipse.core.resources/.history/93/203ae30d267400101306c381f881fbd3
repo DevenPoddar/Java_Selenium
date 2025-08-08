@@ -1,0 +1,120 @@
+package jS;
+
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Patient1 {
+	private String id;
+	private String name;
+
+	public Patient1(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String toString() {
+		return "ID: " + id + ", Name: " + name;
+	}
+}
+
+public class PatientQueue1 {
+	public static void main(String[] args) {
+
+		LinkedList<Patient1> patientQueue = new LinkedList<>();
+		Scanner in = new Scanner(System.in);
+		int choice;
+
+		do {
+			System.out.println("\n Hospital Patient Queue_ _ _ :");
+			System.out.println("1. Add New Patient(normal)");
+			System.out.println("2. Add emergeny patient");
+			System.out.println("3. View all patient");
+			System.out.println("5. Cancel the appointment by ID");
+			System.out.println("6. View first and last patient");
+			System.out.println("7. Exit");
+			System.out.println("Enter your choice :");
+			choice = in.nextInt();
+			in.nextLine();
+
+			switch (choice) {
+			case 1:
+				System.out.println("Enter patient ID :");
+				String id = in.nextLine();
+				System.out.println("Enter patient name :");
+				String patientName = in.nextLine();
+				patientQueue.addLast(new Patient1(id, patientName));
+				System.out.println("Added to queue.");
+				break;
+			case 2:
+				System.out.println("Enter emergency patient ID :");
+				String emgId = in.nextLine();
+				System.out.println("Enter emergency patient name :");
+				String emgName = in.nextLine();
+				patientQueue.addFirst(new Patient1(emgId, emgName));
+				System.out.println("Emergency patient added to front.");
+				break;
+
+			case 3:
+				if (patientQueue.isEmpty()) {
+					System.out.println("No patients found.");
+					return;
+				}
+				System.out.println("All Patients:");
+				for (int i = 0; i < patientQueue.size(); i++) {
+					System.out.println(patientQueue.get(i));
+				}
+				break;
+
+			case 4: {
+				if (patientQueue.isEmpty()) {
+					System.out.println("Queue is empty. No appointments to cancel.");
+					break;
+				}
+				System.out.print("Enter your patient ID to cancel your appointment: ");
+				String cancelId = in.nextLine();
+
+				boolean removed = false;
+				for (int i = 0; i < patientQueue.size(); i++) {
+					if (patientQueue.get(i).getId().equals(cancelId)) {
+						patientQueue.remove(i);
+						removed = true;
+						break;
+					}
+				}
+
+				if (removed) {
+					System.out.println("Your appointment has been successfully canceled.");
+				} else {
+					System.out.println("No appointment found under the ID '" + cancelId + "'.");
+				}
+				break;
+			}
+
+			case 5:
+				if (!patientQueue.isEmpty()) {
+					System.out.println(" First :" + patientQueue.getFirst());
+					System.out.println("Last :" + patientQueue.getLast());
+				} else {
+					System.out.println("Queue is empty");
+				}
+				break;
+			case 6:
+				System.out.println("Exiting......");
+				break;
+
+			default:
+				System.out.println("Invalid Choice");
+			}
+		} while (choice != 6);
+		in.close();
+	}
+}

@@ -1,0 +1,5 @@
+package jS;
+
+public interface Operations {
+    double calculate(double x, double y);
+}

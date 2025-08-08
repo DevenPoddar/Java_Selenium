@@ -1,0 +1,22 @@
+package jS;
+
+public class Static {
+	
+	void adds(int a, int b) {
+		System.out.println("Hi i am instance");
+	}
+	
+	static class my_Static_class{
+	static void add(int a, int b) {
+		System.out.println("Hi i am static"+a);
+	}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Static.add(2,3);
+		
+	}
+
+}

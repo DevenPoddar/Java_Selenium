@@ -1,0 +1,180 @@
+//package JS;
+//
+//import java.util.HashSet;
+//import java.util.Objects;
+//import java.util.Scanner;
+//import java.util.Set;
+//
+//public class HospitalRegistration {
+//
+//    static class Patient {
+//        private String id;
+//        private String name;
+//        private String disease;
+//
+//        public Patient(String id, String name, String disease) {
+//            this.id = id;
+//            this.name = name;
+//            this.disease = disease;
+//        }
+//
+//        public boolean equals(Object obj) {
+//            if (this == obj)
+//                return true;
+//            if (!(obj instanceof Patient))
+//                return false;
+//            Patient patient = (Patient) obj;
+//            return id.equals(patient.id);
+//        }
+//
+//        public int hashCode() {
+//            return Objects.hash(id);
+//        }
+//
+//        public String toString() {
+//            return "Patient ID: " + id + ", Name: " + name + ", Disease: " + disease;
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        Set<Patient> patients = new HashSet<>();
+//        Scanner in = new Scanner(System.in);
+//
+//        while (true) {
+//            System.out.println("\n1. Register Patient\n2. View Registered Patients\n3. Exit");
+//            System.out.print("Select an option: ");
+//
+//            int option = in.nextInt();
+//            in.nextLine();
+//
+//            switch (option) {
+//                case 1:
+//                    System.out.print("Enter Patient ID to register: ");
+//                    String id = in.nextLine();
+//                    System.out.print("Enter Patient Name: ");
+//                    String name = in.nextLine();
+//                    System.out.print("Enter Disease: ");
+//                    String disease = in.nextLine();
+//
+//                    Patient newPatient = new Patient(id, name, disease);
+//
+//                    if (patients.add(newPatient)) {
+//                        System.out.println("Patient with ID " + id + " registered successfully.");
+//                    } else {
+//                        System.out.println("Duplicate registration! Patient with ID " + id + " already exists.");
+//                    }
+//                    break;
+//
+//                case 2:
+//                    System.out.println("Unique Registered Patients:");
+//                    for (Patient patient : patients) {
+//                        System.out.println(patient);
+//                    }
+//                    break;
+//
+//                case 3:
+//                    System.out.println("Exiting...");
+//                    in.close();
+//                    return;
+//
+//                default:
+//                    System.out.println("Invalid option. Try again.");
+//                    break;
+//            }
+//        }
+//    }
+//}
+
+package collections;
+
+import java.util.HashMap;
+
+public class HospitalRegistration {
+
+	static class Patient {
+		private String id;
+		private String name;
+		private String disease;
+
+		public Patient(String id, String name, String disease) {
+			this.id = id;
+			this.name = name;
+			this.disease = disease;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getDisease() {
+			return disease;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setDisease(String disease) {
+			this.disease = disease;
+		}
+
+		public String toString() {
+			return "Patient ID: " + id + ", Name: " + name + ", Disease: " + disease;
+		}
+	}
+
+	public static void main(String[] args) {
+		HashMap<String, Patient> patients = new HashMap<>();
+
+		Patient p1 = new Patient("101", "Deven Poddar", "Flu");
+		patients.put(p1.getId(), p1);
+		Patient p2 = new Patient("102", "Rishu Jha", "Chicken Pox");
+		patients.put(p2.getId(), p2);
+		Patient p3 = new Patient("103", "Durgesh Gupta", "Dengue");
+		patients.put(p3.getId(), p3);
+
+		System.out.println("All Registered Patients:");
+		for (Patient patient : patients.values()) {
+			System.out.println(patient);
+		}
+
+		String searchId = "102";
+		System.out.println("\nView Patient by ID: " + searchId);
+		Patient patient = patients.get(searchId);
+		if (patient != null) {
+			System.out.println(patient);
+		} else {
+			System.out.println("No patient found with ID " + searchId);
+		}
+
+		String updateId = "103";
+		System.out.println("\nUpdate Patient by ID: " + updateId);
+		Patient patientToUpdate = patients.get(updateId);
+		if (patientToUpdate != null) {
+			patientToUpdate.setName("Durgesh Gupta");
+			patientToUpdate.setDisease("Recovered from Malaria");
+			System.out.println("Patient updated successfully.");
+			System.out.println(patientToUpdate);
+		} else {
+			System.out.println("No patient found with ID " + updateId);
+		}
+
+		String removeId = "101";
+		System.out.println("\nRemove Patient by ID: " + removeId);
+		Patient removed = patients.remove(removeId);
+		if (removed != null) {
+			System.out.println("Patient with ID " + removeId + " removed successfully.");
+		} else {
+			System.out.println("No patient found with ID " + removeId);
+		}
+
+		System.out.println("\nAll Registered Patients after removal:");
+		for (Patient p : patients.values()) {
+			System.out.println(p);
+		}
+	}
+}

@@ -1,0 +1,105 @@
+package jS;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+class Appointment implements Comparable<Appointment> {
+	private String patientName;
+	private LocalDateTime dateTime;
+
+	public Appointment(String patientName, LocalDateTime dateTime) {
+		this.patientName = patientName;
+		this.dateTime = dateTime;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public int compareTo(Appointment other) {
+		int cmp = this.dateTime.compareTo(other.dateTime);
+		if (cmp != 0)
+			return cmp;
+		return this.patientName.compareToIgnoreCase(other.patientName);
+	}
+
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Appointment))
+			return false;
+		Appointment a = (Appointment) o;
+		return Objects.equals(patientName.toLowerCase(), a.patientName.toLowerCase())
+				&& Objects.equals(dateTime, a.dateTime);
+	}
+
+	public int hashCode() {
+		return Objects.hash(patientName.toLowerCase(), dateTime);
+	}
+
+	public String toString() {
+		return patientName + " at " + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+	}
+}
+
+public class HospitalAppointments {
+	public static void main(String[] args) {
+		TreeSet<Appointment> appointments = new TreeSet<>();
+		Scanner scanner = new Scanner(System.in);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+		while (true) {
+			System.out.println("\nHospital Appointment System:");
+			System.out.println("1. Add Appointment");
+			System.out.println("2. View All Appointments");
+			System.out.println("3. Exit");
+			System.out.print("Enter your choice: ");
+
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+
+			switch (choice) {
+			case 1:
+				System.out.print("Enter patient name: ");
+				String name = scanner.nextLine();
+				System.out.print("Enter date and time (yyyy-MM-dd HH:mm): ");
+				String dtStr = scanner.nextLine();
+				try {
+					LocalDateTime dateTime = LocalDateTime.parse(dtStr, formatter);
+					boolean added = appointments.add(new Appointment(name, dateTime));
+					if (added) {
+						System.out.println("Appointment added successfully!");
+					} else {
+						System.out.println("Duplicate appointment! Not added.");
+					}
+				} catch (Exception e) {
+					System.out.println("Invalid date/time format.");
+				}
+				break;
+			case 2:
+				System.out.println("All Appointments (Chronological):");
+				if (appointments.isEmpty()) {
+					System.out.println("No appointments found.");
+				} else {
+					for (Appointment app : appointments) {
+						System.out.println(app);
+					}
+				}
+				break;
+			case 3:
+				System.out.println("Exiting system.");
+				scanner.close();
+				return;
+			default:
+				System.out.println("Invalid choice. Please try again.");
+			}
+		}
+	}
+}

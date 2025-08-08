@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ImportExportAction">
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.FileSystem"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+		<section name="ImportExportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="513"/>
+			<item key="DIALOG_Y_ORIGIN" value="79"/>
+			<item key="DIALOG_WIDTH" value="525"/>
+			<item key="DIALOG_HEIGHT" value="550"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+	<section name="FileSystemImportWizard">
+		<item key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
+		<item key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID" value="false"/>
+		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\src\com\Day4"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day5"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day4"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day6"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\ex"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\Day3_Inheritance"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\Day_3"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice3\src\Ex"/>
+			<item value="D:\JAVA_SELENIUM\src\FileHandling"/>
+			<item value="D:\JAVA_SELENIUM\src\JS"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice2\src\com\JS"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice2\src\com\Set"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice2\src\com\JDBC"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice2\src\com\healthcare"/>
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice2\src\com\banking"/>
+		</list>
+		<section name="FileSystemImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="513"/>
+			<item key="DIALOG_Y_ORIGIN" value="79"/>
+			<item key="DIALOG_WIDTH" value="622"/>
+			<item key="DIALOG_HEIGHT" value="615"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_WIDTH" value="450"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_HEIGHT" value="540"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
+		<list key="orderedElements">
+			<item value="org.eclipse.ui.console.ConsoleView"/>
+		</list>
+		<list key="orderedProviders">
+			<item value="org.eclipse.e4.ui.parts"/>
+		</list>
+		<list key="textEntries">
+			<item value="1"/>
+		</list>
+		<list key="textArray">
+			<item value="console"/>
+		</list>
+	</section>
+</section>

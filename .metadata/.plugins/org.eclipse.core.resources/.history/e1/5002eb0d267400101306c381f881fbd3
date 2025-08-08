@@ -1,0 +1,229 @@
+//package JS;
+//
+//import java.util.Scanner;
+//import java.util.TreeMap;
+//import java.util.Map;
+//
+//public class PatientAppointmentScheduler {
+//	public static void main(String[] args) {
+//		TreeMap<Integer, String> appointments = new TreeMap<>();
+//		Scanner in = new Scanner(System.in);
+//
+//		while (true) {
+//			System.out.println("\n1. Add Appointment");
+//			System.out.println("2. View All Appointments");
+//			System.out.println("3. Remove Appointment");
+//			System.out.println("4. Reschedule Appointment");
+//			System.out.println("5. Check Next Appointment");
+//			System.out.println("6. Check Last Appointment");
+//			System.out.println("7. Exit");
+//			System.out.print("Choose an option: ");
+//			int choice = in.nextInt();
+//
+//			switch (choice) {
+//			case 1:
+//				System.out.print("Enter appointment time (e.g., 930 for 9:30AM): ");
+//				int time = in.nextInt();
+//				in.nextLine();
+//				if (appointments.containsKey(time)) {
+//					System.out.println("Appointment slot already taken at this time.");
+//				} else {
+//					System.out.print("Enter patient name: ");
+//					String name = in.nextLine();
+//					appointments.put(time, name);
+//					System.out.println("Appointment added.");
+//				}
+//				break;
+//
+//			case 2:
+//				if (appointments.isEmpty()) {
+//					System.out.println("No appointments scheduled.");
+//				} else {
+//					System.out.println("All Appointments:");
+//					for (Map.Entry<Integer, String> entry : appointments.entrySet()) {
+//						System.out.println(entry.getKey() + " - " + entry.getValue());
+//					}
+//				}
+//				break;
+//
+//			case 3:
+//				System.out.print("Enter appointment time to remove: ");
+//				int timeToRemove = in.nextInt();
+//				if (appointments.remove(timeToRemove) != null) {
+//					System.out.println("Appointment removed.");
+//				} else {
+//					System.out.println("No appointment found at this time.");
+//				}
+//				break;
+//
+//			case 4:
+//				System.out.print("Enter current appointment time: ");
+//				int currTime = in.nextInt();
+//				if (appointments.containsKey(currTime)) {
+//					String name = appointments.get(currTime);
+//					System.out.print("Enter new appointment time: ");
+//					int newTime = in.nextInt();
+//					if (appointments.containsKey(newTime)) {
+//						System.out.println("New appointment time is already taken.");
+//					} else {
+//						appointments.remove(currTime);
+//						appointments.put(newTime, name);
+//						System.out.println("Appointment rescheduled.");
+//					}
+//				} else {
+//					System.out.println("No appointment found at this time.");
+//				}
+//				break;
+//
+//			case 5:
+//				if (appointments.isEmpty()) {
+//					System.out.println("No appointments scheduled.");
+//				} else {
+//					int nextTime = appointments.firstKey();
+//					System.out.println("Next Appointment: " + nextTime + " - " + appointments.get(nextTime));
+//				}
+//				break;
+//
+//			case 6:
+//				if (appointments.isEmpty()) {
+//					System.out.println("No appointments scheduled.");
+//				} else {
+//					int lastTime = appointments.lastKey();
+//					System.out.println("Last Appointment: " + lastTime + " - " + appointments.get(lastTime));
+//				}
+//				break;
+//
+//			case 7:
+//				System.out.println("Exiting.");
+//				in.close();
+//				return;
+//
+//			default:
+//				System.out.println("Invalid choice.");
+//				break;
+//			}
+//		}
+//	}
+//}
+
+package jS;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class PatientAppointmentScheduler {
+	public static void main(String[] args) {
+		TreeMap<LocalDateTime, String> appointments = new TreeMap<>();
+		Scanner in = new Scanner(System.in);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+		while (true) {
+			System.out.println("\n1. Add Appointment");
+			System.out.println("2. View All Appointments");
+			System.out.println("3. Remove Appointment");
+			System.out.println("4. Reschedule Appointment");
+			System.out.println("5. Check Next Appointment");
+			System.out.println("6. Check Last Appointment");
+			System.out.println("7. Exit");
+			System.out.print("Choose an option: ");
+
+			int choice = in.nextInt();
+			in.nextLine(); // consume leftover newline
+
+			switch (choice) {
+			case 1 -> {
+				System.out.print("Enter appointment date and time (yyyy-MM-dd HH:mm): ");
+				String inputDateTime = in.nextLine();
+				LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, formatter);
+				if (dateTime.isBefore(LocalDateTime.now())) {
+					System.out.println("Appointment time must be in the future.");
+					break;
+				}
+
+				if (appointments.containsKey(dateTime)) {
+					System.out.println("There is already an appointment scheduled at this time.");
+				} else {
+					System.out.print("Enter patient name: ");
+					String name = in.nextLine();
+					appointments.put(dateTime, name);
+					System.out.println("Appointment added.");
+				}
+			}
+			case 2 -> {
+				if (appointments.isEmpty()) {
+					System.out.println("No appointments scheduled.");
+				} else {
+					System.out.println("All Appointments:");
+					for (Map.Entry<LocalDateTime, String> entry : appointments.entrySet()) {
+						System.out.println(entry.getKey().format(formatter) + " - " + entry.getValue());
+					}
+				}
+			}
+			case 3 -> {
+				System.out.print("Enter appointment date and time to remove (yyyy-MM-dd HH:mm): ");
+				String inputDateTime = in.nextLine();
+				LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, formatter);
+				if (appointments.remove(dateTime) != null) {
+					System.out.println("Appointment removed.");
+				} else {
+					System.out.println("No appointment found at this time.");
+				}
+			}
+			case 4 -> {
+				System.out.print("Enter current appointment date and time (yyyy-MM-dd HH:mm): ");
+				String currInput = in.nextLine();
+				LocalDateTime currDateTime = LocalDateTime.parse(currInput, formatter);
+
+				if (!appointments.containsKey(currDateTime)) {
+					System.out.println("No appointment found at this time.");
+					break;
+				}
+
+				System.out.print("Enter new appointment date and time (yyyy-MM-dd HH:mm): ");
+				String newInput = in.nextLine();
+				LocalDateTime newDateTime = LocalDateTime.parse(newInput, formatter);
+				if (newDateTime.isBefore(LocalDateTime.now())) {
+					System.out.println("New appointment time must be in the future.");
+					break;
+				}
+
+				if (appointments.containsKey(newDateTime)) {
+					System.out.println("There is already an appointment scheduled at the new time.");
+					break;
+				}
+
+				String name = appointments.remove(currDateTime);
+				appointments.put(newDateTime, name);
+				System.out.println("Appointment rescheduled.");
+			}
+			case 5 -> {
+				if (appointments.isEmpty()) {
+					System.out.println("No appointments scheduled.");
+				} else {
+					LocalDateTime nextTime = appointments.firstKey();
+					System.out.println(
+							"Next Appointment: " + nextTime.format(formatter) + " - " + appointments.get(nextTime));
+				}
+			}
+			case 6 -> {
+				if (appointments.isEmpty()) {
+					System.out.println("No appointments scheduled.");
+				} else {
+					LocalDateTime lastTime = appointments.lastKey();
+					System.out.println(
+							"Last Appointment: " + lastTime.format(formatter) + " - " + appointments.get(lastTime));
+				}
+			}
+			case 7 -> {
+				System.out.println("Exiting.");
+				in.close();
+				return;
+			}
+			default -> System.out.println("Invalid choice.");
+			}
+		}
+	}
+}
