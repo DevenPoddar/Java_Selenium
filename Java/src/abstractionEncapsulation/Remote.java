@@ -1,26 +1,27 @@
 package abstractionEncapsulation;
 
-public abstract class Ab_Remote {
-    abstract void turnOn();
-    abstract void turnOff();
+import java.util.Scanner;
+
+public class Remote {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+        System.out.println("Take remote: 1. Tv  2. Fan ");
+        
+        int taken = sc.nextInt();
+
+        MyRemote remote;
+        if (taken == 1) {
+            remote = new Tv_Remote();
+        } else if (taken == 2) {
+            remote = new Tv_Remote();
+        } else {
+            System.out.println("Invalid choice.");
+            sc.close();
+            return;
+        }
+            remote.turnOn();
+            remote.turnOff();
 }
-
-class Tv_Remote extends Ab_Remote {
-    void turnOn() {
-        System.out.println("TV is now ON.");
-    }
-
-    void turnOff() {
-        System.out.println("TV is now OFF.");
-    }
-}
-class Fan_Remote extends Ab_Remote 
-{
-    void turnOn() {
-        System.out.println("Fan is now ON.");
-    }
-
-    void turnOff() {
-        System.out.println("Fan is now OFF.");
-    }
 }

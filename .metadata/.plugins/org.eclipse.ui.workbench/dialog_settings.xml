@@ -17,13 +17,13 @@
 		<item key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
 		<item key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID" value="false"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\Day_3"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\src\com\Day4"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day5"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day4"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\com\Day6"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\ex"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\Day3_Inheritance"/>
-			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice1\src\Day_3"/>
 			<item value="D:\Java_Practice_Work-main\Java_Practice_Work-main\Practice3\src\Ex"/>
 			<item value="D:\JAVA_SELENIUM\src\FileHandling"/>
 			<item value="D:\JAVA_SELENIUM\src\JS"/>
