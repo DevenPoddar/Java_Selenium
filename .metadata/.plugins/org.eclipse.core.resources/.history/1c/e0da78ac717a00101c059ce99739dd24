@@ -1,0 +1,76 @@
+package com.Day4;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AddProductsMyntra {
+	public static void main(String[] args) throws InterruptedException {
+		// Initialize browser
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.myntra.com/");
+		Thread.sleep(2000);
+
+		// Click login
+		driver.findElement(By.cssSelector("a.desktop-userTitle")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//input[@autofocus='true']")).sendKeys("YOUR_MOBILE_NUMBER"); // <-- change
+		driver.findElement(By.cssSelector("div.submitBottomOption")).click();
+
+		// Wait for OTP input (manual entry required unless you use an OTP API)
+		System.out.println("Enter the OTP you received on your phone: ");
+		Scanner sc = new Scanner(System.in);
+		String otp = sc.nextLine();
+		driver.findElement(By.xpath("//input[@autocomplete='one-time-code']")).sendKeys(otp);
+		driver.findElement(By.cssSelector("button.btn-filled")).click();
+		Thread.sleep(3000);
+
+		// Prepare product search and add-to-cart
+		List<String> products = new ArrayList<>();
+		products.add("shoes");
+		products.add("tshirt");
+		products.add("jeans");
+		for (String product : products) {
+			WebElement searchBox = driver.findElement(By.className("desktop-searchBar"));
+			searchBox.clear();
+			searchBox.sendKeys(product);
+			driver.findElement(By.className("desktop-submit")).click();
+			Thread.sleep(3000);
+
+			// Click 1st product in results
+			List<WebElement> items = driver.findElements(By.cssSelector("li.product-base"));
+			if (items.size() > 0) {
+				items.get(0).click();
+				Thread.sleep(2000);
+				// Switch to new product tab
+				ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+				driver.switchTo().window(tabs.get(tabs.size() - 1));
+				// Select first available size and add to bag
+				List<WebElement> sizes = driver.findElements(By.cssSelector("div.size-buttons-buttonContainer button"));
+				if (sizes.size() > 0) {
+					sizes.get(0).click();
+				}
+				Thread.sleep(500);
+				driver.findElement(By.xpath("//button[.='ADD TO BAG']")).click();
+				Thread.sleep(1000);
+				driver.close();
+				driver.switchTo().window(tabs.get(0));
+			}
+		}
+
+		// Go to cart
+		driver.findElement(By.cssSelector("span.myntraweb-sprite.cartIcon")).click();
+		Thread.sleep(2000);
+
+		// Click Checkout/Place Order
+		driver.findElement(By.xpath("//button[.='PLACE ORDER']")).click();
+		Thread.sleep(3000);
+
+		// driver.quit(); // Uncomment if you want to close the browser at the end
+	}
+}

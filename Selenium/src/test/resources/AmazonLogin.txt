@@ -1,0 +1,2 @@
+amazon.email = 2002devenpoddar@gmail.com
+amazon.password = Amazon@161

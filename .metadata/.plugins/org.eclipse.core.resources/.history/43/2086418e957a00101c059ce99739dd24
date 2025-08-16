@@ -1,0 +1,47 @@
+package com.Day4;
+
+import java.io.File;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class HomeDecor360BookAppointment {
+	public static void main(String args[]) throws InterruptedException {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+		driver.get("https://360homedecor.uk/book-appointment");
+
+		WebElement brand = driver.findElement(By.id("choose_branch"));
+		brand.click();
+		Select dropdown = new Select(brand);
+		dropdown.selectByValue("veneer");
+
+		WebElement style = driver.findElement(By.id("choose_style"));
+		style.click();
+		Select dropdown1 = new Select(style);
+		dropdown1.selectByValue("mediterranean");
+
+		driver.findElement(By.id("first_name")).sendKeys("Deven");
+		driver.findElement(By.id("last_name")).sendKeys("Poddar");
+		driver.findElement(By.id("apt_city")).sendKeys("Kolkata");
+		driver.findElement(By.name("phone_number")).sendKeys("9163558125");
+		driver.findElement(By.id("email")).sendKeys("devenpoddar2002@gmail.com");
+
+		File uploadFile = new File("C:/Users/2002d/Downloads/image.png");
+		driver.findElement(By.cssSelector("#layoutFiles")).sendKeys(uploadFile.getAbsolutePath());
+
+		driver.findElement(By.cssSelector("#privacyPolicy")).isSelected();
+
+		driver.findElement(By.cssSelector("#appointment_form > div.col-12.text-center > button")).click();
+
+		Thread.sleep(5000);
+
+		driver.quit();
+	}
+}

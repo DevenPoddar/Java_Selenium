@@ -1,0 +1,14 @@
+package com.Day4;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.print.PrintOptions;
+
+public class PageOrientation {
+	public static void main(String args[]) {
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.selenium.dev/");
+		PrintOptions printOptions = new PrintOptions();
+		printOptions.setOrientation(PrintOptions.Orientation.PORTRAIT);
+	}
+}

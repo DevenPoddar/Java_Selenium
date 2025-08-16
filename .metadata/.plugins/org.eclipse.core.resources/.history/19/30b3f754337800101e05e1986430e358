@@ -1,0 +1,28 @@
+package com.Day2;
+
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class BrowserName {
+	public static void main(String args[]) {
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		
+		//WebDriver driver = new ChromeDriver();
+		WebDriver driver = new FirefoxDriver();
+
+		Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
+		
+		System.out.println("Browser Name: "+caps.getBrowserName());
+		System.out.println("Browser Version: "+caps.getBrowserVersion());
+		
+		driver.get("https://www.youtube.com/");
+		
+		driver.quit();
+	}
+}

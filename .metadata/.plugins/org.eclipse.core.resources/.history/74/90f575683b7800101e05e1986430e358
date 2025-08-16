@@ -1,0 +1,22 @@
+package com.Day2;
+
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class platformName {
+	public static void main(String args[]) {
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+
+		options.setPlatformName(Platform.WINDOWS.toString());
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.pw.live/");
+
+		driver.quit();
+	}
+}

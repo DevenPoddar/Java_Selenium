@@ -1,0 +1,3 @@
+naukri.email = devenpoddar2002@gmail.com
+naukri.password = 12344321
+resume.path = C:/Users/2002d/Downloads/Linux1/Documents/Deven Final Resume.pdf

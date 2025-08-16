@@ -1,0 +1,177 @@
+//package com.Day4;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Scanner;
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.interactions.Actions;
+//
+//public class AddProductsMyntra {
+//	public static void main(String[] args) throws InterruptedException {
+//		WebDriver driver = new ChromeDriver();
+//		driver.get("https://www.myntra.com/");
+//		Thread.sleep(2000);
+//
+//		WebElement menMenu = driver
+//				.findElement(By.xpath("/html/body/div[1]/div/div/header/div[2]/div[2]/div/div[1]/span[2]"));
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(menMenu).perform();
+//
+//		driver.findElement(By.xpath("/html/body/div[1]/div/div/header/div[2]/div[2]/div/div[2]/div[2]/div[2]/div[1]/a"))
+//				.click();
+//		Thread.sleep(1000);
+//		driver.findElement(By
+//				.xpath("/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div/div[1]/div/div/div[2]/div[2]/div[1]/input"))
+//				.sendKeys("9163558125");
+//		driver.findElement(By
+//				.xpath("/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div/div[1]/div/div/div[2]/div[2]/div[2]/input"))
+//				.click();
+//		driver.findElement(By.cssSelector(
+//				"#reactPageContent > div > div > div.signInContainer > div.mobileInputContainer > div.submitBottomOption"))
+//				.click();
+//
+//		System.out.println("Enter the OTP you received on your phone: ");
+//		Scanner sc = new Scanner(System.in);
+//		String otp = sc.nextLine();
+//		driver.findElement(
+//				By.cssSelector("/html/body/div[2]/div/div[2]/div[3]/div[2]/div/div/div[1]/div/div[2]/div[1]/input[1]"))
+//				.sendKeys(otp);
+//		driver.findElement(By.cssSelector("button.btn-filled")).click();
+//		Thread.sleep(3000);
+//
+//		List<String> products = new ArrayList<>();
+//		products.add("shoes");
+//		products.add("tshirt");
+//		products.add("jeans");
+//		for (String product : products) {
+//			WebElement searchBox = driver.findElement(By.className("desktop-searchBar"));
+//			searchBox.clear();
+//			searchBox.sendKeys(product);
+//			driver.findElement(By.className("desktop-submit")).click();
+//			Thread.sleep(3000);
+//
+//			List<WebElement> items = driver.findElements(By.cssSelector("li.product-base"));
+//			if (items.size() > 0) {
+//				items.get(0).click();
+//				Thread.sleep(2000);
+//				ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+//				driver.switchTo().window(tabs.get(tabs.size() - 1));
+//				List<WebElement> sizes = driver.findElements(By.cssSelector("div.size-buttons-buttonContainer button"));
+//				if (sizes.size() > 0) {
+//					sizes.get(0).click();
+//				}
+//				Thread.sleep(500);
+//				driver.findElement(By.xpath("//button[.='ADD TO BAG']")).click();
+//				Thread.sleep(1000);
+//				driver.close();
+//				driver.switchTo().window(tabs.get(0));
+//			}
+//		}
+//
+//		driver.findElement(By.cssSelector("span.myntraweb-sprite.cartIcon")).click();
+//		Thread.sleep(2000);
+//
+//		driver.findElement(By.xpath("//button[.='PLACE ORDER']")).click();
+//		Thread.sleep(3000);
+//
+//		sc.close();
+//		driver.quit();
+//	}
+//}
+
+package com.Day4;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AddProductsMyntra {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"D:/Github/Java_Selenium/Selenium/src/test/resources/MyntraLogin.txt");
+		props.load(fis);
+
+		String mobile = props.getProperty("myntra.mobile");
+		String password = props.getProperty("myntra.password");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.myntra.com/");
+		Thread.sleep(3000);
+
+		// Click on Profile/Login
+		driver.findElement(By.xpath("//span[text()='Profile']")).click();
+		Thread.sleep(2000);
+
+		// Click on login button in the modal (if needed)
+		driver.findElement(By.xpath("//*[text()='login / Signup']")).click();
+		Thread.sleep(2000);
+
+		// Enter mobile number and continue
+		driver.findElement(By.xpath("//input[@autocomplete='username']")).sendKeys(mobile);
+		driver.findElement(By.xpath("//div[text()='CONTINUE']")).click();
+		Thread.sleep(2000);
+
+		// Enter password and login (wait for password input)
+		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.xpath("//button[text()='LOGIN']")).click();
+		Thread.sleep(3000);
+
+		List<String> products = new ArrayList<>();
+		products.add("tshirt");
+		products.add("shoes");
+		products.add("jeans");
+
+		for (String product : products) {
+			WebElement searchBox = driver.findElement(By.className("desktop-searchBar"));
+			searchBox.clear();
+			searchBox.sendKeys(product);
+			driver.findElement(By.className("desktop-submit")).click();
+			Thread.sleep(3000);
+
+			// Click on first product from the search results
+			WebElement firstResult = driver.findElement(By.xpath("(//li[@class='product-base'])[1]"));
+			firstResult.click();
+			Thread.sleep(3000);
+
+			// Switch to new tab if needed
+			for (String winHandle : driver.getWindowHandles()) {
+				driver.switchTo().window(winHandle);
+			}
+
+			// Select size and add to bag/cart
+			// Choose the first available size (update XPath as per your need)
+			driver.findElement(By.xpath("//p[contains(@class,'size-buttons') and not(contains(@class,'disabled'))]"))
+					.click();
+			driver.findElement(By.xpath("//div[text()='ADD TO BAG']")).click();
+			Thread.sleep(2000);
+
+			// Go back to home/search page for next item
+			driver.navigate().back();
+			driver.navigate().back();
+			Thread.sleep(2000);
+		}
+
+		// Go to cart
+		driver.findElement(By.xpath("//span[text()='Bag']")).click();
+		Thread.sleep(2000);
+
+		// Click on Place Order
+		driver.findElement(By.xpath("//div[text()='PLACE ORDER']")).click();
+		Thread.sleep(2000);
+
+		driver.quit();
+	}
+}

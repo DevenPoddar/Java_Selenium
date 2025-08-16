@@ -1,0 +1,79 @@
+package com.Day3;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoginAmazon {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"D:/Github/Java_Selenium/Selenium/src/test/resources/AmazonLogin.txt");
+		props.load(fis);
+
+		String email = props.getProperty("amazon.email");
+		String password = props.getProperty("amazon.password");
+
+		WebDriver driver = new ChromeDriver();
+
+		try {
+			driver.get("https://www.amazon.in/");
+
+			WebElement SignInBtn = driver
+					.findElement(By.xpath("/html/body/div[1]/header/div/div[1]/div[3]/div/div[2]/a/span"));
+			SignInBtn.click();
+
+			Thread.sleep(1500);
+
+			driver.findElement(By.id("ap_email_login")).sendKeys(email);
+
+			WebElement emailNextBtn = driver
+					.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div/div/div/div/span/form/span/span/input"));
+			emailNextBtn.click();
+
+			Thread.sleep(1500);
+
+			driver.findElement(By.id("ap_password")).sendKeys(password);
+
+			WebElement pwdNextBtn = driver.findElement(By.xpath("//*[@id=\"signInSubmit\"]"));
+			pwdNextBtn.click();
+
+			Thread.sleep(1500);
+
+			driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Samsung Galaxy S24 FE");
+
+			WebElement srchNextBtn = driver.findElement(
+					By.xpath("/html/body/div[1]/header/div[1]/div[1]/div[2]/div/form/div[3]/div/span/input"));
+			srchNextBtn.click();
+
+			Thread.sleep(2500);
+
+			WebElement itemBtn = driver.findElement(By.xpath(
+					"/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[6]/div/div/span/div/div/div/div[2]/div/div/div[1]/a/h2/span"));
+			itemBtn.click();
+
+			Thread.sleep(1500);
+
+			WebElement AddToCartBtn = driver.findElement(By.xpath(
+					"/html/body/div[2]/div/div/div[5]/div[1]/div[4]/div/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/form/div/div/div[39]/div[1]/span/span/span/input"));
+			AddToCartBtn.click();
+
+			Thread.sleep(1500);
+
+			WebElement GoToCartBtn = driver.findElement(By.xpath(
+					"/html/body/div[2]/div/div/div[5]/div[1]/div[10]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[2]/div[2]/span/span/input"));
+			GoToCartBtn.click();
+
+			Thread.sleep(5000);
+
+		} finally {
+			driver.quit();
+		}
+	}
+}

@@ -1,0 +1,48 @@
+package com.Day3;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LogIntoGmail {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream("D:/Github/Java_Selenium/Selenium/src/test/resources/gmailinfo.txt");
+		props.load(fis);
+
+		String email = props.getProperty("gmail.email");
+		String password = props.getProperty("gmail.password");
+
+		WebDriver driver = new ChromeDriver();
+
+		try {
+			driver.get("https://accounts.google.com/");
+
+			driver.findElement(By.id("identifierId")).sendKeys(email);
+
+			WebElement emailNextBtn = driver.findElement(
+					By.xpath("/html/body/div[2]/div[1]/div[2]/c-wiz/main/div[3]/div/div[1]/div/div/button/span"));
+			emailNextBtn.click();
+
+			Thread.sleep(5000);
+
+			driver.findElement(By.name("Passwd")).sendKeys(password);
+
+			WebElement pwdNextBtn = driver.findElement(
+					By.xpath("/html/body/div[2]/div[1]/div[2]/c-wiz/main/div[3]/div/div[1]/div/div/button/span"));
+			pwdNextBtn.click();
+
+			Thread.sleep(5000);
+
+			System.out.println("Logged into Gmail successfully.");
+		} finally {
+			driver.quit();
+		}
+	}
+}
